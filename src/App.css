@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: Quicksand;
 }
 
 .header {
@@ -20,10 +21,17 @@
   background-color: white;
   padding: 1rem;
   margin: 1rem;
-  cursor: pointer;
+  /* cursor: pointer; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
+}
+
+.category_card {
+  margin: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

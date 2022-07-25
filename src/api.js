@@ -9,3 +9,9 @@ export const fetchAllReviews = () => {
     return data.reviews;
   });
 };
+
+export const fetchAllCategories = () => {
+  return api.get("/categories").then(({ data }) => {
+    return data.categories;
+  });
+};
