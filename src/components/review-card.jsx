@@ -5,12 +5,15 @@ import * as api from "../api"
 export default function ReviewCard () {
     const [isLoading, setIsLoading] = useState(true);
     const [currReview, setCurrReview] = useState([]);
-    const review_id = useParams().review_id.slice(1);
+    const [err, setErr] = useState(null);
+    const [votes, setVotes] = useState([]);
+    const review_id = useParams().review_id;
 
     useEffect(() => {
         setIsLoading(true);
         api.fetchReview(review_id).then((review) => {
             setCurrReview(review);
+            setVotes(review.votes)
             setIsLoading(false);
         })
     }, [])
@@ -23,8 +26,29 @@ export default function ReviewCard () {
         return result.join(" ")
     }
 
+    function upvote(review_id) {
+        setVotes((currVotes) => currVotes + 1);
+        setErr(null);
+        api.voteOnComment(review_id, {inc_votes: 1}).catch((err) => {
+            setVotes((currVotes) => currVotes - 1);
+            setErr("Something went wrong, please try again");
+        });
+    }
+
+    function downvote(review_id) {
+        setVotes((currVotes) => currVotes - 1);
+        setErr(null);
+        api.voteOnComment(review_id, {inc_votes: -1}).catch((err) => {
+            setVotes((currVotes) => currVotes + 1);
+            setErr("Something went wrong, please try again");
+        });
+        
+    }
+
+
+    if (err) return <p>{err}</p>
     return (
-        <div>
+        <>
             {isLoading ? (<p>Loading...</p>) : (
                <div key={currReview.review_id} className="review-card">
                    <h2>{currReview.title}</h2>
@@ -34,13 +58,13 @@ export default function ReviewCard () {
                    <p>Owner: {currReview.owner}</p>
                    <p>Created at: {(currReview.created_at).slice(0, -14)}</p>
                    <p>{currReview.review_body}</p>
-                   <p>Votes: {currReview.votes}</p>
+                   <p>Votes: {votes}</p>
                    <div className="vote-box">
-                   <button className="vote-button">👍</button>
-                   <button className="vote-button">👎</button>
+                   <button onClick={() => {upvote(currReview.review_id)}} className="vote-button">👍</button>
+                   <button onClick={() => {downvote(currReview.review_id)}} className="vote-button">👎</button>
                    </div>
                </div>
         )}
-        </div>
+        </>
     )
 }

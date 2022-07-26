@@ -28,3 +28,7 @@ export const fetchReview = (review_id) => {
     return data.review;
   });
 };
+
+export const voteOnComment = (review_id, votes) => {
+  return api.patch(`/reviews/${review_id}`, votes);
+};

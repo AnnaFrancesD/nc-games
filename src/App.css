@@ -54,6 +54,7 @@
   margin: 0.75rem;
   border-color:rgb(164, 164, 164);
   border-radius: 30%;
+  border-width: 0.3px;
 }
 
 .vote-box {
