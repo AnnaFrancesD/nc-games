@@ -13,11 +13,11 @@
   justify-content: center;
 }
 
-.navbar_link {
+.navbar-link {
   padding: 1rem;
 }
 
-.preview_review_card {
+.preview-review-card {
   background-color: white;
   padding: 1rem;
   margin: 1rem;
@@ -29,9 +29,22 @@
 
 }
 
-.category_card {
+.category-card {
   margin: 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.category-link {
+  text-align: center;
+}
+
+.review-card {
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.avatar-small {
+  width: 50px;
 }
