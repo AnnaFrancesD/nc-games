@@ -19,8 +19,8 @@ export default function ReviewCard () {
         <div>
             {isLoading ? (<p>Loading...</p>) : (
                <div key={currReview.review_id} className="review-card">
-                   <p><b>{currReview.title}</b></p>
-                   <img src={currReview.review_img_url} alt={currReview.title} width="100"></img>
+                   <h2>{currReview.title}</h2>
+                   <img src={currReview.review_img_url} alt={currReview.title} width="200"></img>
                    <p>Category: {currReview.category}</p>
                    <p>Designer: {currReview.designer}</p>
                    <p>Owner: {currReview.owner}</p>
