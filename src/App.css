@@ -84,3 +84,11 @@
 .comment-card {
   margin: 1rem;
 }
+
+.post-comment-form {
+  margin: 1rem;
+}
+
+.post-comment-input {
+  width: 75%;
+}

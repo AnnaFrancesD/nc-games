@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import * as api from "../api"
 import CommentCard from "./comment-card";
+import PostCommentForm from "./post-comment-form";
 
 export default function ReviewCard () {
     const [isLoading, setIsLoading] = useState(true);
     const [currReview, setCurrReview] = useState([]);
-    const [isViewingComments, setIsViewingComments] = useState(false)
-    const [currComments, setCurrComments] = useState([])
-    const [hasComments, setHasComments] = useState(false)
+    const [isViewingComments, setIsViewingComments] = useState(false);
+    const [currComments, setCurrComments] = useState([]);
+    const [hasComments, setHasComments] = useState(false);
+    const [isCommenting, setIsCommenting] = useState(false);
     const [err, setErr] = useState(null);
     const [votes, setVotes] = useState([]);
     const review_id = useParams().review_id;
@@ -59,6 +61,11 @@ export default function ReviewCard () {
         setIsViewingComments(true);
     }
 
+    function postComment(review_id) {
+        setIsCommenting(true);
+    }
+
+
     if (err) return <p>{err}</p>
     return (
         <>
@@ -78,17 +85,18 @@ export default function ReviewCard () {
                    </div>
                    <div className="comment-box">
                        <button onClick={() => viewComments(currReview.review_id)} className="comment-button">View Comments</button>
-                       <button className="comment-button">Post Comment</button>
+                       <button onClick={() => setIsCommenting(true)} className="comment-button">Post Comment</button>
                    </div>
                 </section>
         )}
                 <section className="comment-list">
+                {isCommenting && <PostCommentForm review_id={currReview.review_id}/>}
                 {isViewingComments && hasComments ? currComments.map((comment) => {
                    return <CommentCard
                    comment={comment}
                    key={comment.comment_id}
                    />
-                }) : isViewingComments && <p>There are no comments for this review at the moment</p>}
+                }) : isViewingComments && <p>There are no comments for this review at the moment.</p>}
                 </section>
         </>
     )

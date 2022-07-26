@@ -37,3 +37,7 @@ export const fetchComments = (review_id) => {
     return data.comments;
   });
 };
+
+export const addComment = (review_id, comment) => {
+  return api.post(`reviews/${review_id}/comments`, comment);
+};
