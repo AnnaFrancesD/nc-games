@@ -4,7 +4,7 @@ const api = axios.create({
   baseURL: `https://anna-nc-games-app.herokuapp.com/api`,
 });
 
-export const fetchAllReviews = () => {
+export const fetchAllReviews = (category) => {
   return api
     .get(`/reviews`, {
       params: {

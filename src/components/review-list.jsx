@@ -5,10 +5,12 @@ import * as api from "../api"
 export default function ReviewList () {
     const [reviews, setReviews] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const selectedCategory = useParams()
 
     useEffect(() => {
         setIsLoading(true);
-        api.fetchAllReviews().then((reviews) => {
+        const query = selectedCategory.category;
+        api.fetchAllReviews(query).then((reviews) => {
             setReviews(reviews);
             setIsLoading(false);
         })
