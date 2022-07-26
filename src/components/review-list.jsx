@@ -10,14 +10,10 @@ export default function ReviewList () {
     useEffect(() => {
         setIsLoading(true);
         const query = selectedCategory.category;
-        if (query === undefined) {
+
         api.fetchAllReviews().then((reviews) => {
             setReviews(reviews);
             setIsLoading(false);
-        })}
-        api.fetchReviewsByCategory(query).then((reviews) => {
-            setReviews(reviews);
-            setIsLoading(false)
         })
     }, [])
     

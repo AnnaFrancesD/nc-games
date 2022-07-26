@@ -5,9 +5,15 @@ const api = axios.create({
 });
 
 export const fetchAllReviews = () => {
-  return api.get(`/reviews`).then(({ data }) => {
-    return data.reviews;
-  });
+  return api
+    .get(`/reviews`, {
+      params: {
+        category: category,
+      },
+    })
+    .then(({ data }) => {
+      return data.reviews;
+    });
 };
 
 export const fetchReviewsByCategory = (category) => {
