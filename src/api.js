@@ -4,17 +4,16 @@ const api = axios.create({
   baseURL: `https://anna-nc-games-app.herokuapp.com/api`,
 });
 
-export const fetchAllReviews = () => {
-  return api.get(`/reviews`).then(({ data }) => {
-    return data.reviews;
-  });
-};
-
-export const fetchReviewsByCategory = (category) => {
-  return api.get(`/reviews/?category=${category}`).then(({ data }) => {
-    console.log(data);
-    return data.reviews;
-  });
+export const fetchReviews = (category) => {
+  return api
+    .get(`/reviews`, {
+      params: {
+        category: category,
+      },
+    })
+    .then(({ data }) => {
+      return data.reviews;
+    });
 };
 
 export const fetchAllCategories = () => {
@@ -31,4 +30,10 @@ export const fetchReview = (review_id) => {
 
 export const voteOnComment = (review_id, votes) => {
   return api.patch(`/reviews/${review_id}`, votes);
+};
+
+export const fetchComments = (review_id) => {
+  return api.get(`/reviews/${review_id}/comments`).then(({ data }) => {
+    return data.comments;
+  });
 };
