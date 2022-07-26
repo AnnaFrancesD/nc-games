@@ -8,6 +8,7 @@ export default function ReviewCard () {
     const [currReview, setCurrReview] = useState([]);
     const [isViewingComments, setIsViewingComments] = useState(false)
     const [currComments, setCurrComments] = useState([])
+    const [hasComments, setHasComments] = useState(false)
     const [err, setErr] = useState(null);
     const [votes, setVotes] = useState([]);
     const review_id = useParams().review_id;
@@ -51,6 +52,9 @@ export default function ReviewCard () {
     function viewComments(review_id) {
         api.fetchComments(review_id).then((comments) => {
             setCurrComments(comments);
+            setHasComments(true);
+        }).catch((err) => {
+            setHasComments(false)
         })
         setIsViewingComments(true);
     }
@@ -79,12 +83,12 @@ export default function ReviewCard () {
                 </section>
         )}
                 <section className="comment-list">
-                {isViewingComments && currComments.map((comment) => {
+                {isViewingComments && hasComments ? currComments.map((comment) => {
                    return <CommentCard 
                    comment={comment}
                    key={comment.comment_id}
                    />
-                })}
+                }) : isViewingComments && <p>There are no comments for this review at the moment</p>}
                 </section>
         </>
     )
