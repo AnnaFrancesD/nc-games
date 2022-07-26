@@ -17,7 +17,7 @@ useEffect(() => {
 
 
     return (
-        <div>
+        <>
         { isLoading ? (<p>Loading...</p>) : 
         allCategories.map((category) => {
                 return <div key={category.slug+"card"}className="category-card"><p><b key={category.slug}>{category.slug}</b></p>
@@ -28,6 +28,6 @@ useEffect(() => {
             })}
 
             
-        </div>
+        </>
     )
 }

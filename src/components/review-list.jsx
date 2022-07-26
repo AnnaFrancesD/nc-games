@@ -24,7 +24,7 @@ export default function ReviewList () {
     let navigate = useNavigate()
     function viewReview (review_id) {
         setIsLoading(true);
-        navigate(`/reviews/:${review_id}`)
+        navigate(`/reviews/${review_id}`)
     }
 
     return (

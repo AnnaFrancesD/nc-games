@@ -5,7 +5,7 @@ import * as api from "../api"
 export default function ReviewCard () {
     const [isLoading, setIsLoading] = useState(true);
     const [currReview, setCurrReview] = useState([]);
-    const review_id = useParams().review_id.slice(1);
+    const review_id = useParams().review_id;
 
     useEffect(() => {
         setIsLoading(true);
@@ -24,7 +24,7 @@ export default function ReviewCard () {
     }
 
     return (
-        <div>
+        <>
             {isLoading ? (<p>Loading...</p>) : (
                <div key={currReview.review_id} className="review-card">
                    <h2>{currReview.title}</h2>
@@ -37,6 +37,6 @@ export default function ReviewCard () {
                    <p>{currReview.review_body}</p>
                </div>
         )}
-        </div>
+        </>
     )
 }
