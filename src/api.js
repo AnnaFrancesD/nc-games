@@ -22,3 +22,9 @@ export const fetchAllCategories = () => {
     return data.categories;
   });
 };
+
+export const fetchReview = (review_id) => {
+  return api.get(`/reviews/${review_id}`).then(({ data }) => {
+    return data.review;
+  });
+};
