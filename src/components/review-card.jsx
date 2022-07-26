@@ -84,7 +84,7 @@ export default function ReviewCard () {
         )}
                 <section className="comment-list">
                 {isViewingComments && hasComments ? currComments.map((comment) => {
-                   return <CommentCard 
+                   return <CommentCard
                    comment={comment}
                    key={comment.comment_id}
                    />
