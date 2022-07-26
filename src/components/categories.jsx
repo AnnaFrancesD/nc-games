@@ -6,7 +6,6 @@ export default function Categories () {
 const [isLoading, setIsLoading] = useState(true)
 const [allCategories, setAllCategories] = useState([])
 
-
 useEffect(() => {
     setIsLoading(true);
     api.fetchAllCategories().then((categories) => {
