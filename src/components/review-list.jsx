@@ -21,11 +21,6 @@ export default function ReviewList () {
         })
     }, [])
     
-    let navigate = useNavigate()
-    function viewReview (review_id) {
-        setIsLoading(true);
-        navigate(`/reviews/${review_id}`)
-    }
 
     return (
         <>
@@ -35,7 +30,7 @@ export default function ReviewList () {
                    <p><b>{review.title}</b></p>
                    <img src={review.review_img_url} alt={review.title} width="100"></img>
                    <p>{review.review_body.slice(0, 71)}...</p>
-                   <button onClick={() => {viewReview(review.review_id)}} type="button">Read 👀</button>
+                   <button type="button"><Link to={`/reviews/${review_id}`}>Read 👀</Link></button>
                </div>
             })
         )}
