@@ -15,13 +15,21 @@ export default function ReviewCard () {
         })
     }, [])
 
+    function formatCategoryString(string) {
+        const words = string.replace("-", " ").split(" ");
+        const result = words.map((word) => {
+            return word[0].toUpperCase() + word.slice(1)
+        })
+        return result.join(" ")
+    }
+
     return (
         <div>
             {isLoading ? (<p>Loading...</p>) : (
                <div key={currReview.review_id} className="review-card">
                    <h2>{currReview.title}</h2>
                    <img src={currReview.review_img_url} alt={currReview.title} width="200"></img>
-                   <p>Category: {currReview.category}</p>
+                   <p>Category: {formatCategoryString(currReview.category)}</p>
                    <p>Designer: {currReview.designer}</p>
                    <p>Owner: {currReview.owner}</p>
                    <p>Created at: {(currReview.created_at).slice(0, -14)}</p>
