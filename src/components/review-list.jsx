@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import * as api from "../api";
 
 export default function ReviewList() {
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [sortByValue, setSortByValue] = useState(null);
   const selectedCategory = useParams().category;
 
   useEffect(() => {
@@ -21,8 +22,31 @@ export default function ReviewList() {
     navigate(`/reviews/${review_id}`);
   }
 
+  function handleChange(value) {
+    setSortByValue(value);
+    console.log(sortByValue);
+    setIsLoading(true);
+    navigate(`/reviews/?sort_by=${sortByValue}`);
+  }
+
   return (
     <>
+      <div className="dropdown">
+        <label htmlFor="sortby">Sort by</label>
+        <select
+          name="sortby"
+          onChange={(e) => {
+            handleChange(e.target.value);
+          }}
+        >
+          <option value="date-added">Date Added</option>
+          <option value="comment-count">Comment Count</option>
+          <option value="votes">Votes</option>
+        </select>
+        <button>Ascending</button>
+        <button>Descending</button>
+      </div>
+
       {isLoading ? (
         <p>Loading...</p>
       ) : (
