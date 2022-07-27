@@ -61,10 +61,6 @@ export default function ReviewCard () {
         setIsViewingComments(true);
     }
 
-    function postComment(review_id) {
-        setIsCommenting(true);
-    }
-
 
     if (err) return <p>{err}</p>
     return (
@@ -79,10 +75,12 @@ export default function ReviewCard () {
                    <p>Created: {(currReview.created_at).slice(0, -14)} at at {currReview.created_at.slice(-13, -8)}</p>
                    <p>{currReview.review_body}</p>
                    <p>Votes: {votes}</p>
+
                    <div className="vote-box">
                    <button onClick={() => {upvote(currReview.review_id)}} className="vote-button">👍</button>
                    <button onClick={() => {downvote(currReview.review_id)}} className="vote-button">👎</button>
                    </div>
+
                    <div className="comment-box">
                        <button onClick={() => viewComments(currReview.review_id)} className="comment-button">View Comments</button>
                        <button onClick={() => setIsCommenting(true)} className="comment-button">Post Comment</button>
@@ -90,7 +88,7 @@ export default function ReviewCard () {
                 </section>
         )}
                 <section className="comment-list">
-                {isCommenting && <PostCommentForm review_id={currReview.review_id}/>}
+                {isCommenting && <PostCommentForm currComments={currComments} setCurrComments={setCurrComments} review_id={currReview.review_id}/>}
                 {isViewingComments && hasComments ? currComments.map((comment) => {
                    return <CommentCard
                    comment={comment}

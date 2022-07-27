@@ -82,13 +82,16 @@
 }
 
 .comment-card {
-  margin: 1rem;
+  margin: 0.5rem;
 }
 
 .post-comment-form {
+  display: flex;
+  align-items: center;
   margin: 1rem;
 }
 
 .post-comment-input {
   width: 75%;
+  height:3rem;
 }
