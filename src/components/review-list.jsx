@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import * as api from "../api";
+import { formatCategoryString } from "./review-card";
 
 export default function ReviewList() {
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const selectedCategory = useParams().category;
-  console.log(useSearchParams().name);
 
   useEffect(() => {
     setIsLoading(true);
@@ -44,6 +44,10 @@ export default function ReviewList() {
         <button>Ascending</button>
         <button>Descending</button>
       </div>
+
+      {selectedCategory !== undefined && (
+        <h2>{formatCategoryString(selectedCategory)}</h2>
+      )}
 
       {isLoading ? (
         <p>Loading...</p>

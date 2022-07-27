@@ -4,6 +4,15 @@ import * as api from "../api";
 import CommentCard from "./comment-card";
 import PostCommentForm from "./post-comment-form";
 
+export function formatCategoryString(string) {
+  const words = string.replace(/(-)/g, " ").split(" ");
+  console.log(words);
+  const result = words.map((word) => {
+    return word[0].toUpperCase() + word.slice(1);
+  });
+  return result.join(" ");
+}
+
 export default function ReviewCard() {
   const [isLoading, setIsLoading] = useState(true);
   const [currReview, setCurrReview] = useState([]);
@@ -23,14 +32,6 @@ export default function ReviewCard() {
       setIsLoading(false);
     });
   }, []);
-
-  function formatCategoryString(string) {
-    const words = string.replace("-", " ").split(" ");
-    const result = words.map((word) => {
-      return word[0].toUpperCase() + word.slice(1);
-    });
-    return result.join(" ");
-  }
 
   function upvote(review_id) {
     setVotes((currVotes) => currVotes + 1);
