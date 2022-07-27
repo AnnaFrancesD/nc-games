@@ -16,14 +16,16 @@ export default function PostCommentForm({ review_id }) {
   }
 
   function handleSubmit(e) {
-    setPostedComment(commentToAdd);
-    setIsPosted(true);
-    setErr(null);
     e.preventDefault();
-    e.target.reset();
-    api.addComment(review_id, commentToAdd).catch((err) => {
-      setErr("Something went wrong, please try again");
-    });
+    if (commentToAdd.body !== undefined) {
+      setPostedComment(commentToAdd);
+      setIsPosted(true);
+      setErr(null);
+      e.target.reset();
+      api.addComment(review_id, commentToAdd).catch((err) => {
+        setErr("Something went wrong, please try again");
+      });
+    }
   }
 
   return (
@@ -40,7 +42,7 @@ export default function PostCommentForm({ review_id }) {
         <input className="comment-button" type="submit" value="Post"></input>
       </form>
       {isPosted ? (
-        <section className="comment-card">
+        <section className="newly-posted-comment">
           <p>Comment successfully posted!</p>
           <p>
             {postedComment.username}: {postedComment.body}
