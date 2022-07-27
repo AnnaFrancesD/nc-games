@@ -41,3 +41,7 @@ export const fetchComments = (review_id) => {
 export const addComment = (review_id, comment) => {
   return api.post(`reviews/${review_id}/comments`, comment);
 };
+
+export const deleteComment = (comment_id) => {
+  return api.delete(`comments/${comment_id}`);
+};

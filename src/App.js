@@ -28,7 +28,7 @@ function App() {
             ></Route>
             <Route path="/reviews/:review_id" element={<ReviewCard />}></Route>
             <Route
-              path="/reviews/?sort_by=${sortByValue}"
+              path="/reviews/?sort_by=:sort_by_value"
               element={<ReviewList />}
             ></Route>
           </Routes>

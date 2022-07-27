@@ -5,8 +5,8 @@ import * as api from "../api";
 export default function ReviewList() {
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [sortByValue, setSortByValue] = useState(null);
   const selectedCategory = useParams().category;
+  console.log(useSearchParams().name);
 
   useEffect(() => {
     setIsLoading(true);
@@ -23,10 +23,8 @@ export default function ReviewList() {
   }
 
   function handleChange(value) {
-    setSortByValue(value);
-    console.log(sortByValue);
     setIsLoading(true);
-    navigate(`/reviews/?sort_by=${sortByValue}`);
+    navigate(`/reviews/?sort_by=${value}`);
   }
 
   return (
