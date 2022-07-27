@@ -16,16 +16,16 @@ export default function PostCommentForm({ review_id }) {
   }
 
   function handleSubmit(e) {
-    setPostedComment(commentToAdd);
-    setIsPosted(true);
-    setErr(null);
     e.preventDefault();
-    e.target.reset();
-    api.addComment(review_id, commentToAdd).catch((err) => {
-      setErr("Something went wrong, please try again");
-    });
-    //user has filled in the required info - add tag if user tries to submit without filling in the comment
-    //adds the comment fine - need to work out how to show user the post has been successful
+    if (commentToAdd.body !== undefined) {
+      setPostedComment(commentToAdd);
+      setIsPosted(true);
+      setErr(null);
+      e.target.reset();
+      api.addComment(review_id, commentToAdd).catch((err) => {
+        setErr("Something went wrong, please try again");
+      });
+    }
   }
 
   return (
@@ -43,7 +43,9 @@ export default function PostCommentForm({ review_id }) {
       </form>
       {isPosted ? (
         <section className="newly-posted-comment">
-          <p>Comment successfully posted!</p>
+          <p>
+            <b>Comment successfully posted!</b>
+          </p>
           <p>
             {postedComment.username}: {postedComment.body}
           </p>
