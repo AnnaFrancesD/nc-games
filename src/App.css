@@ -109,3 +109,7 @@
   font-family: Quicksand;
   font-size: 0.75rem;
 }
+
+.delete-notification {
+  border: 1px dotted rgb(210, 75, 75);
+}

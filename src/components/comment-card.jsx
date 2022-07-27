@@ -13,7 +13,7 @@ export default function CommentCard({ comment }) {
 
   return (
     <>
-      {!isDeleted && (
+      {!isDeleted ? (
         <section className="comment-card">
           <p>
             {comment.author}: {comment.body}
@@ -29,6 +29,8 @@ export default function CommentCard({ comment }) {
             </button>
           )}
         </section>
+      ) : (
+        <p className="delete-notification">Comment deleted</p>
       )}
     </>
   );
