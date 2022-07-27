@@ -42,7 +42,7 @@ export default function PostCommentForm({ review_id }) {
         <input className="comment-button" type="submit" value="Post"></input>
       </form>
       {isPosted ? (
-        <section className="comment-card">
+        <section className="newly-posted-comment">
           <p>Comment successfully posted!</p>
           <p>
             {postedComment.username}: {postedComment.body}
