@@ -8,7 +8,7 @@ export default function ReviewList() {
   const [isLoading, setIsLoading] = useState(true);
   const selectedCategory = useParams().category;
   const [sortByQuery, setSortByQuery] = useState(null);
-  const [orderQuery, setOrderQuery] = useState(null);
+  const [orderQuery, setOrderQuery] = useState("desc");
 
   useEffect(() => {
     setIsLoading(true);
