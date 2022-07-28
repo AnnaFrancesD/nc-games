@@ -1,6 +1,8 @@
 .App {
   text-align: center;
-  font-family: Quicksand;
+  font-family: Oxygen;
+  color: white;
+  background-color: #29046d;
 }
 
 .header {
@@ -15,32 +17,51 @@
 
 .navbar-link {
   padding: 1rem;
+  text-decoration: none;
+  color: white;
+}
+
+.navbar-link:visited {
+  color: white
 }
 
 .preview-review-card {
-  background-color: white;
   padding: 1rem;
   margin: 1rem;
-  /* cursor: pointer; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
+  background-color: #441e8b;
+  border: 2px solid #36107d;
+  border-radius: 20px;
 }
 
 .category-card {
+  background-color: #441e8b;
+  border: 2px solid #36107d;
+  border-radius: 20px;
   margin: 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: white;
 }
 
 .category-link {
   text-align: center;
+  text-decoration: none;
+  padding: 1.5rem;
+}
+
+.category-link:visited {
+  color:white;
 }
 
 .review-card {
+  background-color: #441e8b;
+  border: 2px solid #36107d;
+  border-radius: 20px;
   padding: 1rem;
   margin: 1rem;
 }
@@ -52,8 +73,8 @@
 .vote-button {
   width: 2rem;
   margin: 0.75rem;
-  border-color:rgb(164, 164, 164);
-  border-radius: 30%;
+  background-color: #29046d;
+  border-radius: 5px;
   border-width: 0.3px;
 }
 
@@ -63,11 +84,14 @@
 }
 
 .comment-button {
-  margin: 0.75rem;
+  margin: 0.5rem;
+  color:#29046d;
+  font-weight: bold;
+  background-color: white;
   border-color:rgb(164, 164, 164);
-  border-radius: 7.5%;
+  border-radius: 5px;
   border-width: 0.3px;
-  font-family: Quicksand;
+  font-family: Oxygen;
 }
 
 .comment-box {
@@ -82,6 +106,9 @@
 }
 
 .comment-card {
+  background-color: #441e8b;
+  border: 2px solid #36107d;
+  border-radius: 20px;
   margin: 0.5rem;
 }
 
@@ -103,13 +130,45 @@
 
 .delete-comment-button {
   margin: 0.75rem;
-  border-color:rgb(164, 164, 164);
-  border-radius: 7.5%;
+  color:#29046d;
+  font-weight: bold;
+  background-color: white;
+  border-radius: 5px;
   border-width: 0.3px;
-  font-family: Quicksand;
+  font-family: Oxygen;
   font-size: 0.75rem;
 }
 
 .delete-notification {
   border: 1px dotted rgb(210, 75, 75);
+}
+
+.dropdown {
+  border: 1px solid white;
+  border-radius: 5px;
+  display:flex;
+  align-items: center;
+  margin:1rem;
+  padding-left: 1rem;
+}
+
+.dropdown select {
+  background-color: #441e8b;
+  height: 2rem;
+  width: 7rem;
+  align-items: center;
+  border-radius: 5px;
+  margin: 0.5rem;
+  font-family: Oxygen;
+}
+
+.dropdown-button {
+  display: flex;
+  align-items: center;
+  background-color: #441e8b;
+  color: white;
+  height: 1.5rem;
+  size: 0.25rem;
+  font-family: Oxygen;
+  border-radius: 5px;
 }

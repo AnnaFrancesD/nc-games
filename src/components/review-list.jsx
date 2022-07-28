@@ -7,6 +7,7 @@ export default function ReviewList() {
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const selectedCategory = useParams().category;
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     setIsLoading(true);
@@ -37,12 +38,12 @@ export default function ReviewList() {
             handleChange(e.target.value);
           }}
         >
-          <option value="date-added">Date Added</option>
-          <option value="comment-count">Comment Count</option>
+          <option value="created_at">Date Added</option>
+          <option value="comment_count">Comment Count</option>
           <option value="votes">Votes</option>
         </select>
-        <button>Ascending</button>
-        <button>Descending</button>
+        <button className="dropdown-button">&#8593;</button>
+        <button className="dropdown-button">&#8595;</button>
       </div>
 
       {selectedCategory !== undefined && (
@@ -56,7 +57,7 @@ export default function ReviewList() {
           return (
             <div key={review.review_id} className="preview-review-card">
               <p>
-                <b>{review.title}</b>
+                <strong>{review.title}</strong>
               </p>
               <img
                 src={review.review_img_url}
@@ -65,6 +66,7 @@ export default function ReviewList() {
               ></img>
               <p>{review.review_body.slice(0, 71)}...</p>
               <button
+                className="comment-button"
                 onClick={() => {
                   viewReview(review.review_id);
                 }}
