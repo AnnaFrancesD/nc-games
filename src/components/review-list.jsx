@@ -80,38 +80,43 @@ export default function ReviewList() {
         </button>
       </div>
 
-      {selectedCategory !== undefined && (
-        <h2>{formatCategoryString(selectedCategory)}</h2>
-      )}
+      <section className="review-list-inner">
+        {selectedCategory !== undefined && (
+          <>
+            <h2>{formatCategoryString(selectedCategory)}</h2>
+            <div className="placeholder"></div>
+          </>
+        )}
 
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        reviews.map((review) => {
-          return (
-            <div key={review.review_id} className="preview-review-card">
-              <p>
-                <strong>{review.title}</strong>
-              </p>
-              <img
-                src={review.review_img_url}
-                alt={review.title}
-                width="100"
-              ></img>
-              <p>{review.review_body.slice(0, 71)}...</p>
-              <button
-                className="comment-button"
-                onClick={() => {
-                  viewReview(review.review_id);
-                }}
-                type="button"
-              >
-                Read 👀
-              </button>
-            </div>
-          );
-        })
-      )}
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          reviews.map((review) => {
+            return (
+              <div key={review.review_id} className="preview-review-card">
+                <p>
+                  <strong>{review.title}</strong>
+                </p>
+                <img
+                  src={review.review_img_url}
+                  alt={review.title}
+                  width="100"
+                ></img>
+                <p>{review.review_body.slice(0, 71)}...</p>
+                <button
+                  className="comment-button"
+                  onClick={() => {
+                    viewReview(review.review_id);
+                  }}
+                  type="button"
+                >
+                  Read 👀
+                </button>
+              </div>
+            );
+          })
+        )}
+      </section>
     </section>
   );
 }
