@@ -43,9 +43,9 @@ export default function PostCommentForm({ review_id }) {
       </form>
       {isPosted ? (
         <section className="newly-posted-comment">
-          <p>
-            <b>Comment successfully posted!</b>
-          </p>
+
+          <p>Comment successfully posted!</p>
+
           <p>
             {postedComment.username}: {postedComment.body}
           </p>

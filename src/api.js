@@ -4,11 +4,13 @@ const api = axios.create({
   baseURL: `https://anna-nc-games-app.herokuapp.com/api`,
 });
 
-export const fetchReviews = (category) => {
+export const fetchReviews = (category, sort_by, order) => {
   return api
     .get(`/reviews`, {
       params: {
-        category: category,
+        category,
+        sort_by,
+        order,
       },
     })
     .then(({ data }) => {
@@ -40,4 +42,8 @@ export const fetchComments = (review_id) => {
 
 export const addComment = (review_id, comment) => {
   return api.post(`reviews/${review_id}/comments`, comment);
+};
+
+export const deleteComment = (comment_id) => {
+  return api.delete(`comments/${comment_id}`);
 };

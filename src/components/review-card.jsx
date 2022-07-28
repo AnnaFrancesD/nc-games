@@ -4,6 +4,14 @@ import * as api from "../api";
 import CommentCard from "./comment-card";
 import PostCommentForm from "./post-comment-form";
 
+export function formatCategoryString(string) {
+  const words = string.replace(/(-)/g, " ").split(" ");
+  const result = words.map((word) => {
+    return word[0].toUpperCase() + word.slice(1);
+  });
+  return result.join(" ");
+}
+
 export default function ReviewCard() {
   const [isLoading, setIsLoading] = useState(true);
   const [currReview, setCurrReview] = useState([]);
@@ -13,6 +21,7 @@ export default function ReviewCard() {
   const [isCommenting, setIsCommenting] = useState(false);
   const [err, setErr] = useState(null);
   const [votes, setVotes] = useState([]);
+  const [hasVoted, setHasVoted] = useState(false);
   const review_id = useParams().review_id;
 
   useEffect(() => {
@@ -24,16 +33,9 @@ export default function ReviewCard() {
     });
   }, []);
 
-  function formatCategoryString(string) {
-    const words = string.replace("-", " ").split(" ");
-    const result = words.map((word) => {
-      return word[0].toUpperCase() + word.slice(1);
-    });
-    return result.join(" ");
-  }
-
   function upvote(review_id) {
     setVotes((currVotes) => currVotes + 1);
+    setHasVoted(true);
     setErr(null);
     api.voteOnComment(review_id, { inc_votes: 1 }).catch((err) => {
       setVotes((currVotes) => currVotes - 1);
@@ -43,6 +45,7 @@ export default function ReviewCard() {
 
   function downvote(review_id) {
     setVotes((currVotes) => currVotes - 1);
+    setHasVoted(true);
     setErr(null);
     api.voteOnComment(review_id, { inc_votes: -1 }).catch((err) => {
       setVotes((currVotes) => currVotes + 1);
@@ -80,7 +83,7 @@ export default function ReviewCard() {
           <p>Designer: {currReview.designer}</p>
           <p>Owner: {currReview.owner}</p>
           <p>
-            Created: {currReview.created_at.slice(0, -14)} at at{" "}
+            Created: {currReview.created_at.slice(0, -14)} at{" "}
             {currReview.created_at.slice(-13, -8)}
           </p>
           <p>{currReview.review_body}</p>
@@ -88,6 +91,7 @@ export default function ReviewCard() {
 
           <div className="vote-box">
             <button
+              disabled={hasVoted ? true : false}
               onClick={() => {
                 upvote(currReview.review_id);
               }}
@@ -96,6 +100,7 @@ export default function ReviewCard() {
               👍
             </button>
             <button
+              disabled={hasVoted ? true : false}
               onClick={() => {
                 downvote(currReview.review_id);
               }}
