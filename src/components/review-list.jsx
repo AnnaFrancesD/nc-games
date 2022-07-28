@@ -7,15 +7,18 @@ export default function ReviewList() {
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const selectedCategory = useParams().category;
-  const searchParams = useSearchParams();
+  const [sortByQuery, setSortByQuery] = useState(null);
+  const [orderQuery, setOrderQuery] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
-    api.fetchReviews(selectedCategory).then((reviews) => {
-      setReviews(reviews);
-      setIsLoading(false);
-    });
-  }, []);
+    api
+      .fetchReviews(selectedCategory, sortByQuery, orderQuery)
+      .then((reviews) => {
+        setReviews(reviews);
+        setIsLoading(false);
+      });
+  }, [selectedCategory, sortByQuery, orderQuery]);
 
   let navigate = useNavigate();
   function viewReview(review_id) {
@@ -24,8 +27,11 @@ export default function ReviewList() {
   }
 
   function handleChange(value) {
-    setIsLoading(true);
-    navigate(`/reviews/?sort_by=${value}`);
+    setSortByQuery(value);
+  }
+
+  function flipOrder(value) {
+    setOrderQuery(value);
   }
 
   return (
@@ -39,11 +45,27 @@ export default function ReviewList() {
           }}
         >
           <option value="created_at">Date Added</option>
-          <option value="comment_count">Comment Count</option>
           <option value="votes">Votes</option>
+          <option value="title">Title</option>
         </select>
-        <button className="dropdown-button">&#8593;</button>
-        <button className="dropdown-button">&#8595;</button>
+        <button
+          onClick={(e) => {
+            flipOrder(e.target.value);
+          }}
+          value="asc"
+          className="dropdown-button"
+        >
+          &#8593;
+        </button>
+        <button
+          onClick={(e) => {
+            flipOrder(e.target.value);
+          }}
+          value="desc"
+          className="dropdown-button"
+        >
+          &#8595;
+        </button>
       </div>
 
       {selectedCategory !== undefined && (
