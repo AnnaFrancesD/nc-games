@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import * as api from "../api";
 import { formatCategoryString } from "./review-card";
 
@@ -9,6 +9,7 @@ export default function ReviewList() {
   const selectedCategory = useParams().category;
   const [sortByQuery, setSortByQuery] = useState(null);
   const [orderQuery, setOrderQuery] = useState("desc");
+  const [err, setErr] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -17,6 +18,9 @@ export default function ReviewList() {
       .then((reviews) => {
         setReviews(reviews);
         setIsLoading(false);
+      })
+      .catch((err) => {
+        setErr(err.message);
       });
   }, [selectedCategory, sortByQuery, orderQuery]);
 
@@ -34,8 +38,16 @@ export default function ReviewList() {
     setOrderQuery(value);
   }
 
+  if (err)
+    return (
+      <>
+        <p>{err}</p>
+        <p>Sorry, that page doesn't exist!</p>
+      </>
+    );
+
   return (
-    <>
+    <section className="review-list">
       <div className="dropdown">
         <label htmlFor="sortby">Sort by</label>
         <select
@@ -68,38 +80,43 @@ export default function ReviewList() {
         </button>
       </div>
 
-      {selectedCategory !== undefined && (
-        <h2>{formatCategoryString(selectedCategory)}</h2>
-      )}
+      <section className="review-list-inner">
+        {selectedCategory !== undefined && (
+          <>
+            <h2>{formatCategoryString(selectedCategory)}</h2>
+            <div className="placeholder"></div>
+          </>
+        )}
 
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        reviews.map((review) => {
-          return (
-            <div key={review.review_id} className="preview-review-card">
-              <p>
-                <strong>{review.title}</strong>
-              </p>
-              <img
-                src={review.review_img_url}
-                alt={review.title}
-                width="100"
-              ></img>
-              <p>{review.review_body.slice(0, 71)}...</p>
-              <button
-                className="comment-button"
-                onClick={() => {
-                  viewReview(review.review_id);
-                }}
-                type="button"
-              >
-                Read 👀
-              </button>
-            </div>
-          );
-        })
-      )}
-    </>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          reviews.map((review) => {
+            return (
+              <div key={review.review_id} className="preview-review-card">
+                <p>
+                  <strong>{review.title}</strong>
+                </p>
+                <img
+                  src={review.review_img_url}
+                  alt={review.title}
+                  width="100"
+                ></img>
+                <p>{review.review_body.slice(0, 71)}...</p>
+                <button
+                  className="comment-button"
+                  onClick={() => {
+                    viewReview(review.review_id);
+                  }}
+                  type="button"
+                >
+                  Read 👀
+                </button>
+              </div>
+            );
+          })
+        )}
+      </section>
+    </section>
   );
 }

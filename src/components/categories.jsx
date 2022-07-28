@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import * as api from "../api";
+import { formatCategoryString } from "./review-card";
 
 export default function Categories() {
   const [isLoading, setIsLoading] = useState(true);
@@ -15,16 +16,16 @@ export default function Categories() {
   }, []);
 
   return (
-    <>
+    <section className="category-list">
       {isLoading ? (
         <p>Loading...</p>
       ) : (
         allCategories.map((category) => {
           return (
             <div key={category.slug + "card"} className="category-card">
-              <p>
-                <b key={category.slug}>{category.slug}</b>
-              </p>
+              <h3>
+                <b key={category.slug}>{formatCategoryString(category.slug)}</b>
+              </h3>
               <p key={category.description}>{category.description}</p>
               <Link
                 to={`/categories/${category.slug}`}
@@ -36,6 +37,6 @@ export default function Categories() {
           );
         })
       )}
-    </>
+    </section>
   );
 }

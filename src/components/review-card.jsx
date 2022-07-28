@@ -26,12 +26,17 @@ export default function ReviewCard() {
 
   useEffect(() => {
     setIsLoading(true);
-    api.fetchReview(review_id).then((review) => {
-      setCurrReview(review);
-      setVotes(review.votes);
-      setIsLoading(false);
-    });
-  }, []);
+    api
+      .fetchReview(review_id)
+      .then((review) => {
+        setCurrReview(review);
+        setVotes(review.votes);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setErr(err.message);
+      });
+  }, [review_id]);
 
   function upvote(review_id) {
     setVotes((currVotes) => currVotes + 1);
@@ -66,9 +71,16 @@ export default function ReviewCard() {
     setIsViewingComments(true);
   }
 
-  if (err) return <p>{err}</p>;
+  if (err)
+    return (
+      <>
+        <p>{err}</p>
+        <p>Sorry, that page doesn't exist!</p>
+      </>
+    );
+
   return (
-    <>
+    <section>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
@@ -95,7 +107,7 @@ export default function ReviewCard() {
               onClick={() => {
                 upvote(currReview.review_id);
               }}
-              className="vote-button"
+              className="upvote-button"
             >
               👍
             </button>
@@ -104,7 +116,7 @@ export default function ReviewCard() {
               onClick={() => {
                 downvote(currReview.review_id);
               }}
-              className="vote-button"
+              className="downvote-button"
             >
               👎
             </button>
@@ -142,6 +154,6 @@ export default function ReviewCard() {
               <p>There are no comments for this review at the moment.</p>
             )}
       </section>
-    </>
+    </section>
   );
 }
