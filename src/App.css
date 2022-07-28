@@ -126,6 +126,7 @@
 .newly-posted-comment {
   margin: 0.5rem;
   border: 1px dotted rgb(118, 118, 218);
+
 }
 
 .delete-comment-button {
