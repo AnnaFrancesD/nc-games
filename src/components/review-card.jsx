@@ -80,7 +80,7 @@ export default function ReviewCard() {
     );
 
   return (
-    <div>
+    <section>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
@@ -154,6 +154,6 @@ export default function ReviewCard() {
               <p>There are no comments for this review at the moment.</p>
             )}
       </section>
-    </div>
+    </section>
   );
 }
