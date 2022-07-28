@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import * as api from "../api";
 import { formatCategoryString } from "./review-card";
 
@@ -9,6 +9,7 @@ export default function ReviewList() {
   const selectedCategory = useParams().category;
   const [sortByQuery, setSortByQuery] = useState(null);
   const [orderQuery, setOrderQuery] = useState("desc");
+  const [err, setErr] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -17,6 +18,9 @@ export default function ReviewList() {
       .then((reviews) => {
         setReviews(reviews);
         setIsLoading(false);
+      })
+      .catch((err) => {
+        setErr(err.message);
       });
   }, [selectedCategory, sortByQuery, orderQuery]);
 
@@ -34,8 +38,16 @@ export default function ReviewList() {
     setOrderQuery(value);
   }
 
+  if (err)
+    return (
+      <>
+        <p>{err}</p>
+        <p>Sorry, that page doesn't exist!</p>
+      </>
+    );
+
   return (
-    <>
+    <section className="review-list">
       <div className="dropdown">
         <label htmlFor="sortby">Sort by</label>
         <select
@@ -100,6 +112,6 @@ export default function ReviewList() {
           );
         })
       )}
-    </>
+    </section>
   );
 }
