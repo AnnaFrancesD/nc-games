@@ -162,7 +162,9 @@
 }
 
 .delete-notification {
-  border: 1px dotted rgb(205, 96, 96);
+  border: 1px dotted rgb(228, 6, 173);
+  width: auto;
+  padding: 1rem;
 }
 
 .dropdown {
