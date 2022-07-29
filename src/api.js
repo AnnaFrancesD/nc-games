@@ -47,3 +47,9 @@ export const addComment = (review_id, comment) => {
 export const deleteComment = (comment_id) => {
   return api.delete(`comments/${comment_id}`);
 };
+
+export const fetchUser = (username) => {
+  return api.get(`/users/${username}`).then(({ data }) => {
+    return data.user;
+  });
+};
