@@ -31,7 +31,9 @@ export default function PostCommentForm({ review_id }) {
   return (
     <>
       <form className="post-comment-form" onSubmit={handleSubmit}>
-        <label htmlFor="body">Add a comment: </label>
+        <label htmlFor="body" style={{ padding: "1rem" }}>
+          Add a comment:{" "}
+        </label>
         <textarea
           className="post-comment-input"
           name="body"
@@ -39,11 +41,15 @@ export default function PostCommentForm({ review_id }) {
             handleChange("body", e.target.value);
           }}
         ></textarea>
-        <input className="comment-button" type="submit" value="Post"></input>
+        <input
+          className="comment-button"
+          type="submit"
+          value="Post"
+          style={{ margin: "1rem" }}
+        ></input>
       </form>
       {isPosted ? (
         <section className="newly-posted-comment">
-
           <p>Comment successfully posted!</p>
 
           <p>

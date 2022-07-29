@@ -110,7 +110,7 @@ export default function ReviewList() {
                   }}
                   type="button"
                 >
-                  Read 👀
+                  Read
                 </button>
               </div>
             );

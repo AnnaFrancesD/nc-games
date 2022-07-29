@@ -3,7 +3,7 @@
   font-family: Oxygen;
   color: white;
   background-image: linear-gradient(90deg, rgb(30, 1, 64), rgba(203, 122, 8, 0.957));
-  background-size: 150rem;
+  background-size: 100rem;
 }
 
 .header {
@@ -25,6 +25,10 @@
   color: white;
 }
 
+.navbar-link:hover {
+  font-weight: bold;
+}
+
 .navbar-link:visited {
   color: white;
 }
@@ -38,21 +42,17 @@
   justify-content: center;
   color:white;
   background-color: rgba(255, 255, 255, 0.1);
-  /* border: 2px solid white; */
   border-radius: 20px;
-  width: 20rem;
 }
 
 .category-card {
   color:white;
   background-color: rgba(255, 255, 255, 0.1);
-  /* border: 2px solid white; */
   border-radius: 20px;
   margin: 3rem;
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  width: 30rem;
 }
 
 .category-link {
@@ -60,6 +60,10 @@
   text-decoration: none;
   padding: 1.5rem;
   font-weight: bold;
+}
+
+.category-link:hover {
+  font-size: 1.05rem;
 }
 
 .category-link:visited {
@@ -71,7 +75,6 @@
 .review-card {
   color:white;
   background-color: rgba(255, 255, 255, 0.1);
-  /* border: 2px solid white; */
   border-radius: 20px;
   padding: 1rem;
   margin: 3rem;
@@ -127,7 +130,6 @@
 
 .comment-card {
   background-color: rgba(255, 255, 255, 0.1);
-  border: 2px solid white;
   border-radius: 20px;
   margin: 3rem;
 }
@@ -145,7 +147,7 @@
 
 .newly-posted-comment {
   background-color: rgba(255, 255, 255, 0.1);
-  border: 8px solid white;
+  border: 5px solid white;
   border-radius: 20px;
   margin: 1rem;
 }
@@ -168,8 +170,6 @@
 }
 
 .dropdown {
-  /* border: 1px solid white;
-  border-radius: 5px; */
   display:flex;
   align-items: center;
   margin: 3rem;
@@ -229,6 +229,14 @@
     display: flex;
     /* flex-direction: column; */
     flex-wrap: wrap;
+  }
+
+  .preview-review-card {
+    width: 15rem;
+  }
+
+  .category-card {
+    width: 20rem;
   }
 
 }
